@@ -1,11 +1,10 @@
 import React from 'react';
+import LastQuests from './LastQuests';
 
 export default function (props) {
     return <section>
         <div>Hello {props.fullName}</div>
-        <section>
-            <h1>Dernières quêtes en cours</h1>
-        </section>
+        <LastQuests></LastQuests>
         <section>
             <h1>Jeux en cours </h1>
         </section>

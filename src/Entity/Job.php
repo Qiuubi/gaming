@@ -26,6 +26,9 @@ class Job
     #[ORM\Column(nullable: true)]
     private ?bool $unlocked = null;
 
+    #[ORM\ManyToOne]
+    private ?Character $characterr = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -75,6 +78,18 @@ class Job
     public function setUnlocked(?bool $unlocked): self
     {
         $this->unlocked = $unlocked;
+
+        return $this;
+    }
+
+    public function getCharacterr(): ?Character
+    {
+        return $this->characterr;
+    }
+
+    public function setCharacterr(?Character $characterr): self
+    {
+        $this->characterr = $characterr;
 
         return $this;
     }

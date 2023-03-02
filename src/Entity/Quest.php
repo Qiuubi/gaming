@@ -26,6 +26,13 @@ class Quest
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $notes = null;
 
+    #[ORM\ManyToOne]
+    private ?Game $game = null;
+
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?QuestStatus $status = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -75,6 +82,30 @@ class Quest
     public function setNotes(?string $notes): self
     {
         $this->notes = $notes;
+
+        return $this;
+    }
+
+    public function getGame(): ?Game
+    {
+        return $this->game;
+    }
+
+    public function setGame(?Game $game): self
+    {
+        $this->game = $game;
+
+        return $this;
+    }
+
+    public function getStatus(): ?QuestStatus
+    {
+        return $this->status;
+    }
+
+    public function setStatus(?QuestStatus $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }

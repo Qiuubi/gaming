@@ -32,6 +32,16 @@ class Equipment
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $location = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $carried = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $img = null;
+
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?EquipmentCategory $category = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -105,6 +115,42 @@ class Equipment
     public function setLocation(?string $location): self
     {
         $this->location = $location;
+
+        return $this;
+    }
+
+    public function isCarried(): ?bool
+    {
+        return $this->carried;
+    }
+
+    public function setCarried(?bool $carried): self
+    {
+        $this->carried = $carried;
+
+        return $this;
+    }
+
+    public function getCategory(): ?EquipmentCategory
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?EquipmentCategory $category): self
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    public function getImg(): ?string
+    {
+        return $this->img;
+    }
+
+    public function setImg(?string $img): self
+    {
+        $this->img = $img;
 
         return $this;
     }

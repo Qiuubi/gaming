@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\GameRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -34,6 +36,30 @@ class Game
 
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $year = null;
+
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Editor $editor = null;
+
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Category $category = null;
+
+    #[ORM\ManyToMany(targetEntity: Support::class)]
+    private Collection $support;
+
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Status $status = null;
+
+    #[ORM\ManyToMany(targetEntity: User::class)]
+    private Collection $playedBy;
+
+    public function __construct()
+    {
+        $this->support = new ArrayCollection();
+        $this->playedBy = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -120,6 +146,90 @@ class Game
     public function setYear(?\DateTimeInterface $year): self
     {
         $this->year = $year;
+
+        return $this;
+    }
+
+    public function getEditor(): ?Editor
+    {
+        return $this->editor;
+    }
+
+    public function setEditor(?Editor $editor): self
+    {
+        $this->editor = $editor;
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Support>
+     */
+    public function getSupport(): Collection
+    {
+        return $this->support;
+    }
+
+    public function addSupport(Support $support): self
+    {
+        if (!$this->support->contains($support)) {
+            $this->support->add($support);
+        }
+
+        return $this;
+    }
+
+    public function removeSupport(Support $support): self
+    {
+        $this->support->removeElement($support);
+
+        return $this;
+    }
+
+    public function getStatus(): ?Status
+    {
+        return $this->status;
+    }
+
+    public function setStatus(?Status $status): self
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getPlayedBy(): Collection
+    {
+        return $this->playedBy;
+    }
+
+    public function addPlayedBy(User $playedBy): self
+    {
+        if (!$this->playedBy->contains($playedBy)) {
+            $this->playedBy->add($playedBy);
+        }
+
+        return $this;
+    }
+
+    public function removePlayedBy(User $playedBy): self
+    {
+        $this->playedBy->removeElement($playedBy);
 
         return $this;
     }
