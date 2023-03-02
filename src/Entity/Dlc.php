@@ -35,6 +35,9 @@ class Dlc
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $year = null;
 
+    #[ORM\ManyToOne]
+    private ?Game $game = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -120,6 +123,18 @@ class Dlc
     public function setYear(\DateTimeInterface $year): self
     {
         $this->year = $year;
+
+        return $this;
+    }
+
+    public function getGame(): ?Game
+    {
+        return $this->game;
+    }
+
+    public function setGame(?Game $game): self
+    {
+        $this->game = $game;
 
         return $this;
     }

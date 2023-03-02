@@ -34,7 +34,7 @@ class GameController extends AbstractController
             return $this->redirectToRoute('app_game_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('game/new.html.twig', [
+        return $this->render('game/new.html.twig', [
             'game' => $game,
             'form' => $form,
         ]);
@@ -60,7 +60,7 @@ class GameController extends AbstractController
             return $this->redirectToRoute('app_game_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('game/edit.html.twig', [
+        return $this->render('game/edit.html.twig', [
             'game' => $game,
             'form' => $form,
         ]);

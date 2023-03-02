@@ -29,6 +29,12 @@ class Weapon
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $location = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $img = null;
+
+    #[ORM\ManyToOne]
+    private ?Character $characterr = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -90,6 +96,30 @@ class Weapon
     public function setLocation(?string $location): self
     {
         $this->location = $location;
+
+        return $this;
+    }
+
+    public function getImg(): ?string
+    {
+        return $this->img;
+    }
+
+    public function setImg(?string $img): self
+    {
+        $this->img = $img;
+
+        return $this;
+    }
+
+    public function getCharacterr(): ?Character
+    {
+        return $this->characterr;
+    }
+
+    public function setCharacterr(?Character $characterr): self
+    {
+        $this->characterr = $characterr;
 
         return $this;
     }

@@ -29,6 +29,14 @@ class Skill
     #[ORM\Column(length: 255)]
     private ?string $notes = null;
 
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Character $characterr = null;
+
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?SkillCategory $category = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -90,6 +98,30 @@ class Skill
     public function setNotes(string $notes): self
     {
         $this->notes = $notes;
+
+        return $this;
+    }
+
+    public function getCharacterr(): ?Character
+    {
+        return $this->characterr;
+    }
+
+    public function setCharacterr(?Character $characterr): self
+    {
+        $this->characterr = $characterr;
+
+        return $this;
+    }
+
+    public function getCategory(): ?SkillCategory
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?SkillCategory $category): self
+    {
+        $this->category = $category;
 
         return $this;
     }
