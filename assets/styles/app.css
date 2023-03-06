@@ -1,7 +1,26 @@
+@font-face {
+    font-family: Cocomat-ultralight;
+    src: url('../styles/fonts/cocomat/Cocomat-Light-trial.ttf');
+}
+
+* {
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
 body {
-    background-color: rgb(37, 0, 0);
+    background-color: rgb(255, 255, 255);
+    font-family: Cocomat-ultralight;
 }
 
 h1 {
-    color: #ffffff;
+    color: #000000;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
 }

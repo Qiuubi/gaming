@@ -1,0 +1,15 @@
+nav,
+ul {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+
+nav {
+    padding: 50px;
+}
+
+li {
+    margin: 0 10px;
+}

@@ -55,6 +55,9 @@ class Game
     #[ORM\ManyToMany(targetEntity: User::class)]
     private Collection $playedBy;
 
+    #[ORM\Column]
+    private ?bool $isFinished = null;
+
     public function __construct()
     {
         $this->support = new ArrayCollection();
@@ -230,6 +233,18 @@ class Game
     public function removePlayedBy(User $playedBy): self
     {
         $this->playedBy->removeElement($playedBy);
+
+        return $this;
+    }
+
+    public function isIsFinished(): ?bool
+    {
+        return $this->isFinished;
+    }
+
+    public function setIsFinished(bool $isFinished): self
+    {
+        $this->isFinished = $isFinished;
 
         return $this;
     }

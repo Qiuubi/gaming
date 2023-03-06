@@ -2,15 +2,14 @@
 
 namespace App\Entity;
 
-use App\Repository\CharacterRepository;
+use App\Repository\SessionRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: CharacterRepository::class)]
-#[ORM\Table(name: '`character`')]
-class Character
+#[ORM\Entity(repositoryClass: SessionRepository::class)]
+class Session
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -23,15 +22,16 @@ class Character
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?int $level = null;
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Game $game = null;
 
-    #[ORM\ManyToMany(targetEntity: Session::class, mappedBy: 'characterr')]
-    private Collection $session;
+    #[ORM\ManyToMany(targetEntity: Character::class, inversedBy: 'session')]
+    private Collection $characterr;
 
     public function __construct()
     {
-        $this->session = new ArrayCollection();
+        $this->characterr = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -63,41 +63,38 @@ class Character
         return $this;
     }
 
-    public function getLevel(): ?int
+    public function getGame(): ?Game
     {
-        return $this->level;
+        return $this->game;
     }
 
-    public function setLevel(?int $level): self
+    public function setGame(?Game $game): self
     {
-        $this->level = $level;
+        $this->game = $game;
 
         return $this;
     }
 
     /**
-     * @return Collection<int, Session>
+     * @return Collection<int, Character>
      */
-    public function getSession(): Collection
+    public function getCharacterr(): Collection
     {
-        return $this->session;
+        return $this->characterr;
     }
 
-    public function addSession(Session $session): self
+    public function addCharacterr(Character $characterr): self
     {
-        if (!$this->session->contains($session)) {
-            $this->session->add($session);
-            $session->addCharacterr($this);
+        if (!$this->characterr->contains($characterr)) {
+            $this->characterr->add($characterr);
         }
 
         return $this;
     }
 
-    public function removeSession(Session $session): self
+    public function removeCharacterr(Character $characterr): self
     {
-        if ($this->session->removeElement($session)) {
-            $session->removeCharacterr($this);
-        }
+        $this->characterr->removeElement($characterr);
 
         return $this;
     }
