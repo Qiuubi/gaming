@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CharacterRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -23,6 +25,14 @@ class Character
 
     #[ORM\Column(nullable: true)]
     private ?int $level = null;
+
+    #[ORM\ManyToMany(targetEntity: Session::class, mappedBy: 'characterr')]
+    private Collection $session;
+
+    public function __construct()
+    {
+        $this->session = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -61,6 +71,33 @@ class Character
     public function setLevel(?int $level): self
     {
         $this->level = $level;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Session>
+     */
+    public function getSession(): Collection
+    {
+        return $this->session;
+    }
+
+    public function addSession(Session $session): self
+    {
+        if (!$this->session->contains($session)) {
+            $this->session->add($session);
+            $session->addCharacterr($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSession(Session $session): self
+    {
+        if ($this->session->removeElement($session)) {
+            $session->removeCharacterr($this);
+        }
 
         return $this;
     }

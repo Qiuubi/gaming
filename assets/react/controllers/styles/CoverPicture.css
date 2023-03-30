@@ -1,0 +1,12 @@
+.qg-cover-img {
+    width: 100%;
+}
+
+.qg-cover-msg {
+    color: rgb(255, 255, 255);
+    font-size: 4rem;
+    font-weight: bold;
+    text-align: center;
+    position: relative;
+    top: -300px;
+}
