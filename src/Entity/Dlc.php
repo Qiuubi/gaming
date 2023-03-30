@@ -20,12 +20,6 @@ class Dlc
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $createdAt = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $dateStart = null;
-
-    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $dateEnding = null;
-
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $img = null;
 
@@ -63,30 +57,6 @@ class Dlc
     public function setCreatedAt(?\DateTimeImmutable $createdAt): self
     {
         $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    public function getDateStart(): ?\DateTimeInterface
-    {
-        return $this->dateStart;
-    }
-
-    public function setDateStart(?\DateTimeInterface $dateStart): self
-    {
-        $this->dateStart = $dateStart;
-
-        return $this;
-    }
-
-    public function getDateEnding(): ?\DateTimeInterface
-    {
-        return $this->dateEnding;
-    }
-
-    public function setDateEnding(?\DateTimeInterface $dateEnding): self
-    {
-        $this->dateEnding = $dateEnding;
 
         return $this;
     }

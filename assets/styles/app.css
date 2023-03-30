@@ -1,3 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
 @font-face {
     font-family: Cocomat-ultralight;
     src: url('../styles/fonts/cocomat/Cocomat-Light-trial.ttf');
@@ -24,3 +29,4 @@ li {
 a {
     text-decoration: none;
 }
+*/

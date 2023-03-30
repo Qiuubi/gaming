@@ -29,6 +29,12 @@ class Session
     #[ORM\ManyToMany(targetEntity: Character::class, inversedBy: 'session')]
     private Collection $characterr;
 
+    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $dateStart = null;
+
+    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $dateEnding = null;
+
     public function __construct()
     {
         $this->characterr = new ArrayCollection();
@@ -95,6 +101,30 @@ class Session
     public function removeCharacterr(Character $characterr): self
     {
         $this->characterr->removeElement($characterr);
+
+        return $this;
+    }
+
+    public function getDateStart(): ?\DateTimeInterface
+    {
+        return $this->dateStart;
+    }
+
+    public function setDateStart(?\DateTimeInterface $dateStart): self
+    {
+        $this->dateStart = $dateStart;
+
+        return $this;
+    }
+
+    public function getDateEnding(): ?\DateTimeInterface
+    {
+        return $this->dateEnding;
+    }
+
+    public function setDateEnding(?\DateTimeInterface $dateEnding): self
+    {
+        $this->dateEnding = $dateEnding;
 
         return $this;
     }

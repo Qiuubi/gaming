@@ -10,12 +10,6 @@ function Home(props) {
     return (
         <section>
             <CoverPicture altCover={data.altCover} message={data.message}></CoverPicture>
-            <section>
-                <h1>Jeux en cours </h1>
-            </section>
-            <section>
-                <h1>Derniers jeux </h1>
-            </section>
         </section>
     );
 }
