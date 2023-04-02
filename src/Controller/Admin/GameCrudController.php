@@ -3,11 +3,14 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Game;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
-use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
 class GameCrudController extends AbstractCrudController
 {
@@ -20,17 +23,20 @@ class GameCrudController extends AbstractCrudController
     {
         return $crud
             ->setEntityLabelInPlural('Jeux')
-            ->setSearchFields(['name', 'story', 'year', 'img']);
+            ->setSearchFields(['name', 'story', 'year', 'img', 'editor', 'category', 'status', 'isFinished']);
     }
 
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id'),
-            TextField::new('name'),
-            TextField::new('story'),
-            DateField::new('year'),
-            TextField::new('img'),
+            TextField::new('name', 'Nom'),
+            TextField::new('story', 'Synopsis'),
+            DateField::new('year', 'Année de sortie'),
+            ImageField::new('img', 'Jacquette')->setBasePath('uploads/images/')->setUploadDir('public/uploads/images/'),
+            AssociationField::new('editor', 'Editeur/Développeur')->autocomplete(),
+            AssociationField::new('category', 'Genre')->autocomplete(),
+            AssociationField::new('status', 'Status'),
+            BooleanField::new('isFinished', 'Terminé ?')
         ];
     }
 }

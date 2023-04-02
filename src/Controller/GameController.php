@@ -6,6 +6,7 @@ use App\Entity\Game;
 use App\Form\GameType;
 use App\Repository\GameRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -19,6 +20,12 @@ class GameController extends AbstractController
         return $this->render('game/index.html.twig', [
             'games' => $gameRepository->findAll(),
         ]);
+    }
+
+    #[Route('/3174/api/games', name: 'games_api', methods: ['GET', 'POST'])]
+    public function allGamesJson(GameRepository $gameRepository): JsonResponse
+    {
+        return $this->json($gameRepository->findAll());
     }
 
     #[Route('/new', name: 'app_game_new', methods: ['GET', 'POST'])]

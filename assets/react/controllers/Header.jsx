@@ -33,6 +33,7 @@ function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
 
+
 export default function Header() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
@@ -118,7 +119,7 @@ export default function Header() {
                     </a>
                 </Popover.Group>
                 <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-                    <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
+                    <a href="/login" className="text-sm font-semibold leading-6 text-gray-900">
                         Connexion <span aria-hidden="true">&rarr;</span>
                     </a>
                 </div>
@@ -151,7 +152,7 @@ export default function Header() {
                                     {({ open }) => (
                                         <>
                                             <Disclosure.Button className="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 hover:bg-gray-50">
-                                                Product
+                                                Genres
                                                 <ChevronDownIcon
                                                     className={classNames(open ? 'rotate-180' : '', 'h-5 w-5 flex-none')}
                                                     aria-hidden="true"
@@ -176,27 +177,27 @@ export default function Header() {
                                     href="#"
                                     className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                                 >
-                                    Features
+                                    L'outil
                                 </a>
                                 <a
                                     href="#"
                                     className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                                 >
-                                    Marketplace
+                                    Vidéoludothèque
                                 </a>
                                 <a
                                     href="#"
                                     className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                                 >
-                                    Company
+                                    A propos
                                 </a>
                             </div>
                             <div className="py-6">
                                 <a
-                                    href="#"
+                                    href="/login"
                                     className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                                 >
-                                    Log in
+                                    Connexion
                                 </a>
                             </div>
                         </div>
@@ -206,35 +207,3 @@ export default function Header() {
         </header>
     )
 }
-
-/*
-function Header(props) {
-    const navLinks = [
-        { "number": 1, "href": "#", "title": "Accueil" },
-        { "number": 2, "href": "#", "title": "A propos" },
-        { "number": 3, "href": "#", "title": "Jeux" }
-    ];
-    return (
-        <div>
-            <nav>
-                <ul>
-                    <li>
-                        <a href="#">
-                            <h1>{props.title}</h1>
-                        </a>
-                    </li>
-                    {navLinks.map((list) =>
-                        <NavList key={list.number} href={list.href} title={list.title} />
-                    )}
-                    <li>
-                        <a href="#">{props.login}</a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-    );
-}
-
-export default Header;
-
-*/
