@@ -1,47 +1,44 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Game index{% endblock %}
+{% block title %}Game index
+{% endblock %}
 
 {% block body %}
-    <h1>Game index</h1>
+	<h1>Game index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>CreatedAt</th>
-                <th>DateStart</th>
-                <th>DateEnding</th>
-                <th>Img</th>
-                <th>Story</th>
-                <th>Year</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for game in games %}
-            <tr>
-                <td>{{ game.id }}</td>
-                <td>{{ game.name }}</td>
-                <td>{{ game.createdAt ? game.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ game.dateStart ? game.dateStart|date('Y-m-d') : '' }}</td>
-                <td>{{ game.dateEnding ? game.dateEnding|date('Y-m-d') : '' }}</td>
-                <td>{{ game.img }}</td>
-                <td>{{ game.story }}</td>
-                <td>{{ game.year ? game.year|date('Y-m-d') : '' }}</td>
-                <td>
-                    <a href="{{ path('app_game_show', {'id': game.id}) }}">show</a>
-                    <a href="{{ path('app_game_edit', {'id': game.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="9">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+	<table class="table-auto">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Name</th>
+				<th>CreatedAt</th>
+				<th>Img</th>
+				<th>Story</th>
+				<th>Year</th>
+				<th>actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for game in games %}
+				<tr>
+					<td>{{ game.id }}</td>
+					<td>{{ game.name }}</td>
+					<td>{{ game.createdAt ? game.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+					<td>{{ game.img }}</td>
+					<td>{{ game.story }}</td>
+					<td>{{ game.year ? game.year|date('Y-m-d') : '' }}</td>
+					<td>
+						<a href="{{ path('game_show', {'id': game.id}) }}">show</a>
+						<a href="{{ path('game_edit', {'id': game.id}) }}">edit</a>
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="9">no records found</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
 
-    <a href="{{ path('app_game_new') }}">Create new</a>
+	<a href="{{ path('game_new') }}">Create new</a>
 {% endblock %}

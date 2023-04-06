@@ -3,10 +3,14 @@ module.exports = {
   content: [
     "./assets/**/*.js",
     "./templates/**/*.html.twig",
+    "./templates/login/*.html.twig",
+    "./templates/game/*.html.twig",
     "./assets/react/controllers/*.jsx",
   ],
   theme: {
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/forms')
+  ],
 }
