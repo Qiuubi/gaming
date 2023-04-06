@@ -6,7 +6,7 @@
 {% block body %}
 	<h1>Game index</h1>
 
-	<table class="table">
+	<table class="table-auto">
 		<thead>
 			<tr>
 				<th>Id</th>
@@ -28,8 +28,8 @@
 					<td>{{ game.story }}</td>
 					<td>{{ game.year ? game.year|date('Y-m-d') : '' }}</td>
 					<td>
-						<a href="{{ path('app_game_show', {'id': game.id}) }}">show</a>
-						<a href="{{ path('app_game_edit', {'id': game.id}) }}">edit</a>
+						<a href="{{ path('game_show', {'id': game.id}) }}">show</a>
+						<a href="{{ path('game_edit', {'id': game.id}) }}">edit</a>
 					</td>
 				</tr>
 			{% else %}
@@ -40,5 +40,5 @@
 		</tbody>
 	</table>
 
-	<a href="{{ path('app_game_new') }}">Create new</a>
+	<a href="{{ path('game_new') }}">Create new</a>
 {% endblock %}

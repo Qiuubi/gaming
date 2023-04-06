@@ -4,8 +4,8 @@ module.exports = {
     "./assets/**/*.js",
     "./templates/**/*.html.twig",
     "./templates/login/*.html.twig",
+    "./templates/game/*.html.twig",
     "./assets/react/controllers/*.jsx",
-    "./assets/react/controllers/forms/*.jsx",
   ],
   theme: {
     extend: {},
