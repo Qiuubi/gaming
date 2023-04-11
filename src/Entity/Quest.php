@@ -20,18 +20,20 @@ class Quest
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?bool $unlocked = null;
-
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $notes = null;
 
     #[ORM\ManyToOne]
     private ?Game $game = null;
 
-    #[ORM\ManyToOne]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?QuestStatus $status = null;
+    #[ORM\Column]
+    private ?bool $main = null;
+
+    #[ORM\Column]
+    private ?bool $secondary = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $oorder = null;
 
     public function getId(): ?int
     {
@@ -62,18 +64,6 @@ class Quest
         return $this;
     }
 
-    public function isUnlocked(): ?bool
-    {
-        return $this->unlocked;
-    }
-
-    public function setUnlocked(?bool $unlocked): self
-    {
-        $this->unlocked = $unlocked;
-
-        return $this;
-    }
-
     public function getNotes(): ?string
     {
         return $this->notes;
@@ -98,14 +88,38 @@ class Quest
         return $this;
     }
 
-    public function getStatus(): ?QuestStatus
+    public function isMain(): ?bool
     {
-        return $this->status;
+        return $this->main;
     }
 
-    public function setStatus(?QuestStatus $status): self
+    public function setMain(bool $main): self
     {
-        $this->status = $status;
+        $this->main = $main;
+
+        return $this;
+    }
+
+    public function isSecondary(): ?bool
+    {
+        return $this->secondary;
+    }
+
+    public function setSecondary(bool $secondary): self
+    {
+        $this->secondary = $secondary;
+
+        return $this;
+    }
+
+    public function getOorder(): ?int
+    {
+        return $this->oorder;
+    }
+
+    public function setOorder(?int $oorder): self
+    {
+        $this->oorder = $oorder;
 
         return $this;
     }

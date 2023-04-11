@@ -35,6 +35,12 @@ class Session
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $dateEnding = null;
 
+    #[ORM\ManyToOne]
+    private ?Difficulty $difficulty = null;
+
+    #[ORM\ManyToOne]
+    private ?User $user = null;
+
     public function __construct()
     {
         $this->characterr = new ArrayCollection();
@@ -125,6 +131,30 @@ class Session
     public function setDateEnding(?\DateTimeInterface $dateEnding): self
     {
         $this->dateEnding = $dateEnding;
+
+        return $this;
+    }
+
+    public function getDifficulty(): ?Difficulty
+    {
+        return $this->difficulty;
+    }
+
+    public function setDifficulty(?Difficulty $difficulty): self
+    {
+        $this->difficulty = $difficulty;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }
