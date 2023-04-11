@@ -42,15 +42,17 @@ class Game
     #[ORM\ManyToMany(targetEntity: Support::class)]
     private Collection $support;
 
-    #[ORM\ManyToOne]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Status $status = null;
-
     #[ORM\ManyToMany(targetEntity: User::class)]
     private Collection $playedBy;
 
     #[ORM\Column]
     private ?bool $isFinished = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $imgAlt = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $imgCover = null;
 
     public function __construct()
     {
@@ -171,18 +173,6 @@ class Game
         return $this;
     }
 
-    public function getStatus(): ?Status
-    {
-        return $this->status;
-    }
-
-    public function setStatus(?Status $status): self
-    {
-        $this->status = $status;
-
-        return $this;
-    }
-
     /**
      * @return Collection<int, User>
      */
@@ -215,6 +205,30 @@ class Game
     public function setIsFinished(bool $isFinished): self
     {
         $this->isFinished = $isFinished;
+
+        return $this;
+    }
+
+    public function getImgAlt(): ?string
+    {
+        return $this->imgAlt;
+    }
+
+    public function setImgAlt(?string $imgAlt): self
+    {
+        $this->imgAlt = $imgAlt;
+
+        return $this;
+    }
+
+    public function getImgCover(): ?string
+    {
+        return $this->imgCover;
+    }
+
+    public function setImgCover(?string $imgCover): self
+    {
+        $this->imgCover = $imgCover;
 
         return $this;
     }

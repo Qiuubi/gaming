@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Game;
 use App\Form\GameType;
 use App\Repository\GameRepository;
+use App\Repository\SessionRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,6 +27,14 @@ class GameController extends AbstractController
     public function allGamesJson(GameRepository $gameRepository): JsonResponse
     {
         return $this->json($gameRepository->findAll());
+    }
+
+    // Reprendre ici
+    #[Route('/3174/api/session?limit=5', name: 'five_last_session', methods: ['GET', 'POST'])]
+    public function fiveLastSessions(SessionRepository $sessionRepository): JsonResponse
+    {
+
+        return $this->json(true);
     }
 
     #[Route('/new', name: 'game_new', methods: ['GET', 'POST'])]
