@@ -1,7 +1,5 @@
-import React from 'react';
-import NavList from './NavList';
 import "./styles/Header.css";
-
+import React from 'react'
 import { Fragment, useState } from 'react'
 import { Dialog, Disclosure, Popover, Transition } from '@headlessui/react'
 import {
@@ -14,15 +12,42 @@ import {
     XMarkIcon,
 } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, PhoneIcon, PlayCircleIcon } from '@heroicons/react/20/solid'
+import DiceIcon from "../icons/DiceIcon";
+import NinjaIcon from "../icons/NinjaIcon";
+import ChessIcon from "../icons/ChessIcon";
+import DnDIcon from "../icons/DnDIcon";
+import GunIcon from "../icons/GunIcon";
+import PanoramaIcon from "../icons/PanoramaIcon";
+import MountainCityIcon from "../icons/MountainCity";
+import GhostIcon from "../icons/GhostIcon";
+import CarIcon from "../icons/CarIcon";
+import FortIcon from "../icons/FortIcon";
+import DiceD20Icon from "../icons/DiceD20";
+import GemIcon from "../icons/GemIcon";
+import FistIcon from "../icons/FistIcon";
+import HandleSparklesIcon from "../icons/HandSparklesIcon";
+import ChessBoardIcon from "../icons/ChessBoardIcon";
+import JetFighterUpIcon from "../icons/JetFighterUp";
 
-const products = [
+const categories = [
+    { id: 1, name: 'O-RPG', description: "Baldur's Gate, Elder Scrolls...", href: '#', icon: DiceIcon },
+    { id: 2, name: 'J-RPG', description: "Final Fantasy, Xenoblades Chronicles...", href: '#', icon: NinjaIcon },
+    { id: 3, name: 'Tactical-RPG', description: "Disgaea, God Wars...", href: '#', icon: ChessIcon },
+    { id: 4, name: 'MMORPG', description: "Guild Wars, World Of WarCraft...", href: '#', icon: DnDIcon },
+    { id: 5, name: 'FPS', description: "Doom, Call of Duty, Timesplitters 2...", href: '#', icon: GunIcon },
+    { id: 6, name: 'Action Aventure', description: "Zelda, Grand Theft Auto...", href: '#', icon: PanoramaIcon },
+    { id: 7, name: 'Plate-Forme', description: "Mario, Jak & Daxter...", href: '#', icon: MountainCityIcon },
+    { id: 8, name: 'Survival Horror', description: "Resident Evil, Silent Hill...", href: '#', icon: GhostIcon },
+    { id: 9, name: 'Course', description: "Mario Kart, Forza Horizon...", href: '#', icon: CarIcon },
+    { id: 10, name: 'Metroidvania', description: "Metroid, Castlevania, Dead Cells...", href: '#', icon: FortIcon },
+    { id: 11, name: 'Rogue Like', description: "Rogue Legacy, Enter The Gungeon", href: '#', icon: DiceD20Icon },
+    { id: 12, name: 'Hack & Slash', description: "Diablo, LightTorch...", href: '#', icon: GemIcon },
+    { id: 13, name: 'Beat Them All', description: "God Of War...", href: '#', icon: HandleSparklesIcon },
+    { id: 14, name: 'Stratégie', description: "Age Of Empire, StarCraft...", href: '#', icon: ChessBoardIcon },
+    { id: 15, name: 'Baston', description: "Virtua Fighter, Super Smash Bros Melee...", href: '#', icon: FistIcon },
+    { id: 16, name: 'Shoot Them Up', description: "Ikaruga...", href: '#', icon: JetFighterUpIcon },
+];
 
-    { name: 'Analytics', description: 'Get a better understanding of your traffic', href: '#', icon: ChartPieIcon },
-    { name: 'Engagement', description: 'Speak directly to your customers', href: '#', icon: CursorArrowRaysIcon },
-    { name: 'Security', description: 'Your customers’ data will be safe and secure', href: '#', icon: FingerPrintIcon },
-    { name: 'Integrations', description: 'Connect with third-party tools', href: '#', icon: SquaresPlusIcon },
-    { name: 'Automations', description: 'Build strategic funnels that will convert', href: '#', icon: ArrowPathIcon },
-]
 const callsToAction = [
 
     { name: 'Watch demo', href: '#', icon: PlayCircleIcon },
@@ -34,13 +59,13 @@ function classNames(...classes) {
 }
 
 export default function Header() {
-    const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
     return (
         <header className="bg-white">
             <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
                 <div className="flex lg:flex-1">
-                    <a href="#" className="-m-1.5 p-1.5">
+                    <a href="/" className="-m-1.5 p-1.5">
                         <span className="sr-only">Qiiubi Gaming</span>
                         <img className="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="" />
                     </a>
@@ -73,20 +98,20 @@ export default function Header() {
                         >
                             <Popover.Panel className="absolute -left-8 top-full z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5">
                                 <div className="p-4">
-                                    {products.map((item) => (
+                                    {categories.map((category) => (
                                         <div
-                                            key={item.name}
+                                            key={category.id}
                                             className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-gray-50"
                                         >
                                             <div className="flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
-                                                <item.icon className="h-6 w-6 text-gray-600 group-hover:text-indigo-600" aria-hidden="true" />
+                                                <category.icon className="h-2 w-2 text-gray-600 group-hover:text-indigo-600" aria-hidden="true" />
                                             </div>
                                             <div className="flex-auto">
-                                                <a href={item.href} className="block font-semibold text-gray-900">
-                                                    {item.name}
+                                                <a href={category.href} className="block font-semibold text-gray-900">
+                                                    {category.name}
                                                     <span className="absolute inset-0" />
                                                 </a>
-                                                <p className="mt-1 text-gray-600">{item.description}</p>
+                                                <p className="mt-1 text-gray-600">{category.description}</p>
                                             </div>
                                         </div>
                                     ))}

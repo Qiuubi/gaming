@@ -64,6 +64,12 @@ class GameController extends AbstractController
         ]);
     }
 
+    #[Route('/3174/api/games/{id}', name: 'show_game_api', methods: ['GET', 'POST'])]
+    public function showGameJson(GameRepository $gameRepository): JsonResponse
+    {
+        return $this->json($gameRepository->findAll());
+    }
+
     #[Route('/{id}/edit', name: 'game_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Game $game, GameRepository $gameRepository): Response
     {

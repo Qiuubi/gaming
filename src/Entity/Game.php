@@ -52,7 +52,7 @@ class Game
     private ?string $imgAlt = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $imgCover = null;
+    private ?string $imgIllustration = null;
 
     public function __construct()
     {
@@ -221,14 +221,14 @@ class Game
         return $this;
     }
 
-    public function getImgCover(): ?string
+    public function getImgIllustration(): ?string
     {
-        return $this->imgCover;
+        return $this->imgIllustration;
     }
 
-    public function setImgCover(?string $imgCover): self
+    public function setImgIllustration(?string $imgIllustration): self
     {
-        $this->imgCover = $imgCover;
+        $this->imgIllustration = $imgIllustration;
 
         return $this;
     }

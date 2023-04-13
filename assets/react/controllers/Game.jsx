@@ -20,7 +20,7 @@ export default function Game(props) {
                 </h3>
                 <p className="mt-1 text-sm text-gray-500">{props.editor.name}</p>
             </div>
-            <p className="text-sm font-medium text-gray-900">{props.support.map((supp) => supp.name)}</p>
+            <p className="text-sm font-medium text-gray-900" style={"color:" }>{props.support.map((supp) => supp.name)}</p>
         </div>
     </div>)
 }

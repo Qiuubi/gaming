@@ -35,6 +35,8 @@
 		</tbody>
 	</table>
 
+	<div {{ react_component('ShowGame') }}></div>
+
 	<a href="{{ path('games') }}">back to list</a>
 
 	<a href="{{ path('game_edit', {'id': game.id}) }}">edit</a>
