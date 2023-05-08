@@ -5,12 +5,13 @@ namespace App\Controller;
 use App\Entity\Game;
 use App\Form\GameType;
 use App\Repository\GameRepository;
+use App\Repository\QuestRepository;
 use App\Repository\SessionRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/games')]
 class GameController extends AbstractController
@@ -57,17 +58,32 @@ class GameController extends AbstractController
     }
 
     #[Route('/{id}', name: 'game_show', methods: ['GET'])]
-    public function show(Game $game): Response
+    public function showOneGame(Game $game, GameRepository $gameRepository, QuestRepository $questRepository): Response
     {
+        $gameResults = $gameRepository->findGameWithSupportName($game->getId());
+        $questsResults = $questRepository->findAllQuestsByGameId($game->getId());
+        $gameDetails = $gameResults[0];
+        // dd($questsResults);
         return $this->render('game/show.html.twig', [
             'game' => $game,
+            'gameDetails' => $gameDetails,
+            'questsDetails' => $questsResults
         ]);
     }
 
-    #[Route('/3174/api/games/{id}', name: 'show_game_api', methods: ['GET', 'POST'])]
-    public function showGameJson(GameRepository $gameRepository): JsonResponse
+    #[Route('/3174/api/games/{id}/quests', name: 'show_game_api', methods: ['GET'])]
+    public function showQuestsByGameIdJson(GameRepository $gameRepository, Game $game, QuestRepository $questRepository): JsonResponse
     {
-        return $this->json($gameRepository->findAll());
+        return $this->json([
+            $gameRepository->findGameWithSupportName($game->getId()),
+            $questRepository->findAllQuestsByGameId($game->getId())
+        ]);
+    }
+
+    #[Route('/3174/api/games/{id}/quests', name: 'show_quests_by_game_api', methods: ['GET'])]
+    public function showQuestsByGameJson(QuestRepository $questRepository, Game $game): JsonResponse
+    {
+        return $this->json($questRepository->findQuestByGameId($game->getId()));
     }
 
     #[Route('/{id}/edit', name: 'game_edit', methods: ['GET', 'POST'])]

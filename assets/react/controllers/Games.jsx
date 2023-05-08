@@ -16,10 +16,6 @@ export default function Games() {
         getApiData();
     }, []);
 
-    function path(file) {
-        return '/uploads/images/cover/' + file;
-    }
-
     return (
         <div class="grid grid-rows-4 grid-flow-col gap-4">
             <div className="bg-white">
@@ -27,7 +23,8 @@ export default function Games() {
                     <h2 className="text-2xl font-bold tracking-tight text-gray-900">Tous les jeux</h2>
                     <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
                         {games && games.map((game) => (
-                            <Game
+                            <Game key={game.id}
+                                id={game.id}
                                 img={game.img}
                                 alt={game.alt}
                                 name={game.name}

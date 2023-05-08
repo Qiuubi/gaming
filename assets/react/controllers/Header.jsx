@@ -1,16 +1,13 @@
 import "./styles/Header.css";
 import React from 'react'
 import { Fragment, useState } from 'react'
+
+import CategoryList from "./CategoryList";
+import NavLists from "./NavLists";
+import HeaderLogo from "./HeaderLogo";
+
 import { Dialog, Disclosure, Popover, Transition } from '@headlessui/react'
-import {
-    ArrowPathIcon,
-    Bars3Icon,
-    ChartPieIcon,
-    CursorArrowRaysIcon,
-    FingerPrintIcon,
-    SquaresPlusIcon,
-    XMarkIcon,
-} from '@heroicons/react/24/outline'
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, PhoneIcon, PlayCircleIcon } from '@heroicons/react/20/solid'
 import DiceIcon from "../icons/DiceIcon";
 import NinjaIcon from "../icons/NinjaIcon";
@@ -54,6 +51,11 @@ const callsToAction = [
     { name: 'Contact sales', href: '#', icon: PhoneIcon },
 ]
 
+const logo = {
+    src: "https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600",
+    altImg: "logo qiuubi-gaming"
+}
+
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
@@ -64,12 +66,7 @@ export default function Header() {
     return (
         <header className="bg-white">
             <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
-                <div className="flex lg:flex-1">
-                    <a href="/" className="-m-1.5 p-1.5">
-                        <span className="sr-only">Qiiubi Gaming</span>
-                        <img className="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="" />
-                    </a>
-                </div>
+                <HeaderLogo img={logo.src} imgAlt={logo.alt} />
                 <div className="flex lg:hidden">
                     <button
                         type="button"
@@ -97,35 +94,15 @@ export default function Header() {
                             leaveTo="opacity-0 translate-y-1"
                         >
                             <Popover.Panel className="absolute -left-8 top-full z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5">
-                                <div className="p-4">
+                                <div className="grid grid-cols-2 divide-x divide-gray-900/5 bg-gray-50 p-4 ">
                                     {categories.map((category) => (
-                                        <div
-                                            key={category.id}
-                                            className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-gray-50"
-                                        >
-                                            <div className="flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
-                                                <category.icon className="h-2 w-2 text-gray-600 group-hover:text-indigo-600" aria-hidden="true" />
-                                            </div>
-                                            <div className="flex-auto">
-                                                <a href={category.href} className="block font-semibold text-gray-900">
-                                                    {category.name}
-                                                    <span className="absolute inset-0" />
-                                                </a>
-                                                <p className="mt-1 text-gray-600">{category.description}</p>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-                                <div className="grid grid-cols-2 divide-x divide-gray-900/5 bg-gray-50">
-                                    {callsToAction.map((item) => (
-                                        <a
-                                            key={item.name}
-                                            href={item.href}
-                                            className="flex items-center justify-center gap-x-2.5 p-3 text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-100"
-                                        >
-                                            <item.icon className="h-5 w-5 flex-none text-gray-400" aria-hidden="true" />
-                                            {item.name}
-                                        </a>
+                                        <CategoryList
+                                            id={category.id}
+                                            name={category.name}
+                                            description={category.description}
+                                            href={category.href}
+                                            icon={category.icon}
+                                        />
                                     ))}
                                 </div>
                             </Popover.Panel>
@@ -135,10 +112,10 @@ export default function Header() {
                     <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
                         L'outil
                     </a>
-                    <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
+                    <a href="/games" className="text-sm font-semibold leading-6 text-gray-900">
                         Vidéoludothèque
                     </a>
-                    <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
+                    <a href="/about" className="text-sm font-semibold leading-6 text-gray-900">
                         A propos
                     </a>
                 </Popover.Group>
@@ -228,6 +205,6 @@ export default function Header() {
                     </div>
                 </Dialog.Panel>
             </Dialog>
-        </header>
+        </header >
     )
 }

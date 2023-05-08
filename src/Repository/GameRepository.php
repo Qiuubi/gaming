@@ -2,9 +2,13 @@
 
 namespace App\Repository;
 
+use App\Entity\Editor;
 use App\Entity\Game;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use App\Entity\Quest;
+use App\Entity\Support;
+use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<Game>
@@ -39,6 +43,26 @@ class GameRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * @return Game[] Returns an array of Game objects
+     */
+    public function findGameWithSupportName($gameId): array
+    {
+        return $this->createQueryBuilder('game')
+            ->innerJoin('game.editor', 'editor')
+            ->innerJoin('game.category', 'category')
+            ->innerJoin('game.support', 'support')
+            ->andWhere('game.id = :gameId')
+            ->setParameter('gameId', $gameId)
+            ->select('
+                game.id, game.name, game.year, game.img, game.story, game.isFinished, 
+                editor.name as editorName, 
+                category.name as categoryName, 
+                support.name as supportName')
+            ->getQuery()
+            ->getResult();
+    }
+
     //    /**
     //     * @return Game[] Returns an array of Game objects
     //     */
@@ -53,6 +77,8 @@ class GameRepository extends ServiceEntityRepository
     //            ->getResult()
     //        ;
     //    }
+
+
 
     //    public function findOneBySomeField($value): ?Game
     //    {
