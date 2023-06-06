@@ -46,7 +46,7 @@ class GameRepository extends ServiceEntityRepository
     /**
      * @return Game[] Returns an array of Game objects
      */
-    public function findGameWithSupportName($gameId): array
+    public function findGameWithSupport($gameId): array
     {
         return $this->createQueryBuilder('game')
             ->innerJoin('game.editor', 'editor')
@@ -57,8 +57,8 @@ class GameRepository extends ServiceEntityRepository
             ->select('
                 game.id, game.name, game.year, game.img, game.story, game.isFinished, 
                 editor.name as editorName, 
-                category.name as categoryName, 
-                support.name as supportName')
+                category.name as categoryName, category.color as categoryColor, 
+                support.name as supportName, support.color as supportColor')
             ->getQuery()
             ->getResult();
     }

@@ -41,6 +41,9 @@ class Session
     #[ORM\ManyToOne]
     private ?User $user = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $isFinished = null;
+
     public function __construct()
     {
         $this->characterr = new ArrayCollection();
@@ -155,6 +158,18 @@ class Session
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function isIsFinished(): ?bool
+    {
+        return $this->isFinished;
+    }
+
+    public function setIsFinished(?bool $isFinished): self
+    {
+        $this->isFinished = $isFinished;
 
         return $this;
     }
